@@ -1,0 +1,11 @@
+#!/bin/bash
+
+if [ $# != 2 ]
+  then
+    echo "Invalid format"
+    echo "Syntax: ./checkSSL type domain.com"
+    echo "Possible types: dates; issuer; subject; startdate; enddate; purpose; pubkey; fingerprint; alias"
+    exit 0
+fi
+
+echo | openssl s_client -connect $2:443 2>/dev/null | openssl x509 -noout -$1
